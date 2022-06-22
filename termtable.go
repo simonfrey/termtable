@@ -8,17 +8,16 @@ import (
 type TermTable struct {
 	w             io.Writer
 	columns       []int
-	spacing       int
 	columnDivider string
 }
 
-func New(w io.Writer, spacing int, columnDivider string) *TermTable {
-	if spacing < 1 {
-		spacing = 1
+func New(w io.Writer, columnDivider string) *TermTable {
+	if columnDivider == "" {
+		columnDivider = " "
 	}
+
 	return &TermTable{
 		w:             w,
-		spacing:       spacing,
 		columnDivider: columnDivider,
 	}
 
@@ -32,7 +31,7 @@ func (tt *TermTable) WriteRowDivider(divider rune) error {
 	if len(tt.columns) == 0 {
 		return fmt.Errorf("need at least a single column")
 	}
-	dividerLen := len(tt.columns) * (len(tt.columnDivider) + tt.spacing)
+	dividerLen := len(tt.columns) * len(tt.columnDivider)
 	for _, v := range tt.columns {
 		dividerLen += v
 	}
@@ -108,7 +107,7 @@ func (tt *TermTable) WriteRow(row []Field) error {
 			p = string([]rune(v.String())[:targetLen-4]) + "..."
 		case rowLen <= targetLen:
 			whiteSpaceCount := targetLen - rowLen
-			p = fmt.Sprintf("%s%s%s%s", columnDivider, v.String(), WhiteSpace(tt.spacing), WhiteSpace(whiteSpaceCount))
+			p = fmt.Sprintf("%s%s%s", columnDivider, v.String(), WhiteSpace(whiteSpaceCount))
 		}
 		_, err := fmt.Fprint(tt.w, p)
 		if err != nil {
