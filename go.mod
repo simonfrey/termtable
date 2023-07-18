@@ -1,4 +1,4 @@
-module github.com/vitalfrog/termtable
+module github.com/simonfrey/termtable
 
 go 1.18
 
