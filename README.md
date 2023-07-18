@@ -36,8 +36,8 @@ This is how your terminal tables actually could look ;)
 ## Motivation
 
 All the other table writer libraries I found always required me to have all the data at the moment of drawing. As I use
-[JSONL](https://github.com/vitalfrog/jsonl) in the API the data comes one record after another, which made the other libraries
-not a fit for the [VitalFrog](https://www.vitalfrog.com/) go client.
+[JSONL](https://github.com/vitalfrog/jsonl) in on of my APIs the data comes one record after another, which made the other libraries
+not a fit.
 
 ## Simple example
 
@@ -58,7 +58,7 @@ You can print this beautiful table with the below code example. (Errors dropped 
 package main
 
 import (
-	"github.com/vitalfrog/termtable"
+	"github.com/simonfrey/termtable"
 	"os"
 )
 
